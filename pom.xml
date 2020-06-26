@@ -16,7 +16,7 @@
     <description>mall project for Spring Boot</description>
 
     <properties>
-        <java.version>14</java.version>
+        <java.version>13</java.version>
     </properties>
 
     <dependencies>
@@ -69,6 +69,12 @@
             <groupId>org.mybatis.generator</groupId>
             <artifactId>mybatis-generator-core</artifactId>
             <version>1.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+
         </dependency>
     </dependencies>
 
