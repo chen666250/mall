@@ -9,4 +9,6 @@ import java.util.List;
 public interface HelloService {
      String hello();
     List<Vendor> getVendors();
+
+    void insertValue(Object testdata);
 }

@@ -11,16 +11,15 @@
 <div id="button">
     <button v-on:click="get()">{{msg}}</button>
     <button v-on:click="getAllVendors()">{{msg}} 2</button>
-<table>
-    <tbody>
-    <tr v-for="vendor in vendors" :key="vendor.vendor_id">
-        <td>{{vendor.vendor_id}}</td>
-        <td>{{vendor.vendor_name}}</td>
-        <td>{{vendor.vendor_describle}}</td>
-    </tr>
-    </tbody>
-</table>
-
+    <table>
+        <tbody>
+        <tr v-for="vendor in vendors" :key="vendor.vendorId">
+            <td>{{vendor.vendorId}}</td>
+            <td>{{vendor.vendorName}}</td>
+            <td>{{vendor.vendorDescrible}}</td>
+        </tr>
+        </tbody>
+    </table>
 
 
 </div>
@@ -32,18 +31,59 @@
 
 </div>
 Index
+<div id="inputTest">
+    <input type="text" v-model="inputtestdata">
+    <button v-on:click="inputtest()">点击我input</button>
+    <p>{{msg}}</p>
+</div>
 <script>
+    var test3 = new Vue(
+        {
+            el: "#inputTest",
+            data: {
+                msg:"请输入",
+                inputtestdata: "123"
+            },
+            methods: {
+
+                inputtest() {
+                    console.log(test3.inputtestdata)
+                    axios.post('/testInput', {testdata: test3.inputtestdata})
+                        .then(response => {
+
+
+                            if (response.status == 200) {
+                                this.msg=response.data
+                            } else {
+                                alert("添加失败");
+                            }
+
+                        })
+                        .catch(function (error) { // 请求失败处理
+                            console.log(error);
+                        })
+
+                }
+
+
+            }
+
+
+        }
+    )
+
+
     var button = new Vue(
         {
             el: '#button',
             data: {
                 msg: "this is a button",
-                vendors: [{vendor_id: "1", vendor_name:"apple", vendor_describle: "ios"},
+                vendors: [{vendorId: "1", vendorName: "apple", vendorDescrible: "ios"},
                     {
-                    vendor_id: "2",
-                    vendor_name: "huawei",
-                    vendor_describle: "p251"
-                }],
+                        vendorId: "2",
+                        vendorName: "huawei",
+                        vendorDescrible: "p251"
+                    }],
 
             },
             methods: {
@@ -60,10 +100,13 @@ Index
                     button.msg = "button pressed2"
                     axios.get('/vendors')
                         .then(response => {
-                            console.log(response);
-                            if (response.status==200){
-                                this.vendors=response.data;
-                            }else {
+
+
+                            if (response.status == 200) {
+                                console.log(123)
+                                button.vendors = response.data;
+                                console.log(response.data)
+                            } else {
                                 alert("查询失败");
                             }
 
