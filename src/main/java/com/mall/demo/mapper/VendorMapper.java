@@ -1,14 +1,30 @@
 package com.mall.demo.mapper;
 
 import com.mall.demo.model.Vendor;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-
+import com.mall.demo.model.VendorExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
-@Mapper
 public interface VendorMapper {
-    @Select("select * from vendor")
-    List<Vendor> getAllvendor();
+    int countByExample(VendorExample example);
 
+    int deleteByExample(VendorExample example);
+
+    int deleteByPrimaryKey(Integer vendorId);
+
+    int insert(Vendor record);
+
+    int insertSelective(Vendor record);
+
+    List<Vendor> selectByExample(VendorExample example);
+
+    Vendor selectByPrimaryKey(Integer vendorId);
+
+    int updateByExampleSelective(@Param("record") Vendor record, @Param("example") VendorExample example);
+
+    int updateByExample(@Param("record") Vendor record, @Param("example") VendorExample example);
+
+    int updateByPrimaryKeySelective(Vendor record);
+
+    int updateByPrimaryKey(Vendor record);
 }
